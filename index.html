@@ -17,6 +17,7 @@
             <div class="hero-content">
                 <img src="./images/logo.svg" alt="Logo" class="logo">
                 <nav class="hero__nav">
+                    <img class="close" src="./images/icon-close.svg" alt="Close">
                     <ul>
                         <li><a href="#">Collections</a></li>
                         <li><a href="#">Men</a></li>
@@ -27,8 +28,25 @@
                 </nav>
             </div>
             <div class="hero-content hero__buy-perfil">
-                <img src="./images/icon-cart.svg" alt="Cart" class="btn-cart">
+                <div class="btn-cart">
+                    <img src="./images/icon-cart.svg" alt="Cart">
+                </div>
                 <img src="./images/image-avatar.png" alt="Perfil" class="perfil">
+                <div class="show-cart">
+                    <p class="show-cart__title">Cart</p>
+                    <div class="show-cart__product">
+                        <p class="cart-text">Your cart is empty</p>
+                        <div class="product">
+                            <img src="./images/image-product-1.jpg" alt="Product">
+                            <div class="product__information">
+                                <p class="product__name">Fall Limited Edition Sneakers</p>
+                                <p class="product__name">$125.00 x <span class="product-count">3</span> <span class="product-price-total">$375.00</span></p>
+                            </div>
+                            <img id="trash" src="./images/icon-delete.svg" alt="Trash">
+                        </div>
+                        <button class="checkout">Checkout</button>
+                    </div>
+                </div>
             </div>
         </header>
         <section class="sneaker container">
@@ -43,10 +61,18 @@
                     <img src="./images/image-product-1.jpg" alt="Product" class="sneaker__img">
                 </figure>
                 <div class="sneaker-images">
-                    <img class="image" src="./images/image-product-1.jpg" alt="product1">
-                    <img class="image" src="./images/image-product-2.jpg" alt="product2">
-                    <img class="image" src="./images/image-product-3.jpg" alt="product3">
-                    <img class="image" src="./images/image-product-4.jpg" alt="product4">
+                    <div class="image-wrapper">
+                        <img class="image" src="./images/image-product-1.jpg" alt="product1">
+                    </div>
+                    <div class="image-wrapper">
+                        <img class="image" src="./images/image-product-2.jpg" alt="product2">
+                    </div>
+                    <div class="image-wrapper">
+                        <img class="image" src="./images/image-product-3.jpg" alt="product3">
+                    </div>
+                    <div class="image-wrapper">
+                        <img class="image" src="./images/image-product-4.jpg" alt="product4">
+                    </div>
                 </div>
             </div>
             <section class="sneaker-content">
@@ -75,6 +101,7 @@
             </section>
         </section>
     </main>
+    <script defer src="./js/main.js"></script>
   <!-- Collections
   Men
   Women

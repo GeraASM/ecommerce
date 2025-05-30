@@ -1,4 +1,4 @@
-* {box-sizing: border-box; margin: 0; padding: 0;}
+*, *::after, *::before {box-sizing: border-box; margin: 0; padding: 0;}
 @import url('https://fonts.googleapis.com/css2?family=Kumbh+Sans:wght@100..900&display=swap');
 :root {
     --spacing-0: 0px;
@@ -60,6 +60,7 @@ body {
     width: 16px;
     height: 16px;
     margin-right: var(--spacing-200);
+    cursor: pointer;
 }
 
 .logo {
@@ -71,43 +72,177 @@ body {
     display: none;
 }
 
+.hero__nav--active {
+    display: block;
+    position: fixed;
+    left: 0;
+    top: 0;
+    height: 100%;
+    width: 250px;
+    background-color: #fff;
+    z-index: 10;
+    padding: 24px;
+}
+
+.main--active::before {
+    content: '';
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    background-color: #00000060;
+    z-index: 2;
+}
+
+.close {
+    margin-bottom: 56px;
+    cursor: pointer;
+    width: 14px; height: 14px;
+}
+
 .hero__nav ul {
     list-style: none;
     display: flex;
+    flex-direction: column;
     gap: 32px;
 }
 
 .hero__nav ul li a{
     text-decoration: none;
-    color: var(--clr-grey-500);
+    color: var(--clr-grey-950);
     line-height: 26px;
-    font-size: 15px;
-    font-weight: 400;
+    font-size: 18px;
+    font-weight: bold;
 }
 
 .hero-content {
+    position: relative;
     display: flex;
     align-items: center;
     gap: var(--spacing-300);
 }
 
 .hero__buy-perfil {
+    position: relative;
     margin-left: auto;
 }
 
 .btn-cart {
     width: 22px; height: 20px;
+    cursor: pointer;
+}
+
+.btn-cart > img {
+    width: 100%;
+    height: 100%;
+    object-fit: contain;
 }
 
 .perfil {
     width: 24px; height: 24px;
 }
 
+.show-cart {
+    display: none;
+    border-radius: 10px;
+    position: absolute;
+    bottom: -300px;
+    left: -275px;
+    background-color: #fff;
+    width: 360px; height: 256px;
+    z-index: 2;
+    box-shadow: 4px 0 20px var(--clr-grey-100);
+}
+
+.show-cart--show {
+    display: block;
+}
+
+.show-cart__title {
+    padding: 24px;
+    border-bottom: 1px solid var(--clr-grey-100);
+    color: var(--clr-grey-950);
+    font-weight: bold;
+    line-height: 26px;
+    font-size: 16px;
+}
+
+.show-cart__product {
+    height: 100%;
+    padding: 24px;
+    display: flex;
+    flex-direction: column;
+    gap: 24px;
+}
+
+.cart-text{
+    color: var(--clr-grey-500);
+    font-size: 16px;
+    line-height: 26px;
+    font-weight: bold;
+    position: absolute;
+    top: 55%;
+    left: 30%;
+}
+
+.product {
+    display: none;
+    align-items: center;
+    gap: 16px;
+}
+
+.product > img {
+    width: 50px; height: 50px;
+    display: block;
+    object-fit: cover;
+    border-radius: 4px;
+}
+
+.product__name {
+    height: 26px;
+    font-weight: 400;
+    font-size: 16px;
+    line-height: 26px;
+    color: var(--clr-grey-500);
+    vertical-align: super;
+    font-family: "Kumbh Sans", sans-serif;
+}
+
+.product-price-total {
+    font-weight: bold;
+    font-size: 16px;
+    line-height: 26px;
+    color: var(--clr-grey-950);
+    vertical-align: baseline;
+}
+
+#trash {
+    display: block;
+    width: 14px; height: 16px;
+    display: block;
+    object-fit: cover;
+    cursor: pointer;
+}
+
+
+.checkout {
+    all: unset;
+    border-radius: 10px;
+    padding: 16px;
+    color: var(--clr-grey-950);
+    background-color: var(--clr-orange-500);
+    cursor: pointer;
+    font-weight: bold;
+    font-size: 16px;
+    line-height: 26px;
+    text-align: center;
+     display: none;
+   }
+
+
 .sneaker__figure {
     height: 300px;
     border: 1px solid greenyellow;
     position: relative;
-    /* margin-bottom: var(--spacing-300); */
 }
 
 .sneaker__img {
@@ -142,6 +277,7 @@ body {
 
 .back {
     left: 5%;
+    transform: translateY(-50%) rotate(180deg);
 }
 
 .next {
@@ -164,6 +300,7 @@ body {
     font-size: var(--fnt-size-title);
     line-height: var(--line-height-title);
     font-weight: 700;
+    margin: 16px 0;
 }
 
 .sneaker__text {
@@ -176,6 +313,7 @@ body {
     display: flex;
     align-items: flex-start;
     justify-content: space-between;
+    margin: 32px 0;
 }
 
 .sneaker__offer {
@@ -219,10 +357,12 @@ body {
     justify-content: space-between;
     border-radius: 10px;
     padding: 16px;
+    margin-bottom: 16px;
 }
 
 .symboligy {
     object-fit: contain;
+    cursor: pointer;
 }
 
 .sneaker__count {
@@ -281,6 +421,11 @@ body {
         height: 100px;
     }
 
+    .hero__nav--active {
+        width: 300px;
+        padding: 48px 80px;
+    }
+
     .hero__buy-perfil {
         gap: var(--spacing-600);
     }
@@ -306,6 +451,7 @@ body {
         flex-direction: column;
         justify-content: flex-start;
         gap: 8px;
+        margin: 0;
     }
 
     .sneaker-buy {
@@ -316,6 +462,7 @@ body {
     .sneaker__add-remove {
         width: 50%;
         flex-grow: 1;
+        margin-bottom: 0;
     }
 
     .sneaker__btn-cart {
@@ -323,13 +470,40 @@ body {
         flex-grow: 1;
     }
 
+    .sneaker__title {
+        margin: 0;
+    }
+
+    .show-cart {
+        left: -150px;
+        bottom: -270px;
+    }
+
 }
 
 @media screen and (min-width: 1024px) {
     .hero__nav {
         display: block;
+        position: relative;
         margin-left: var(--spacing-400);
+        height: auto;
+        width: auto;
+        padding: 0;
+        background-color: #fff;
     }
+
+    .hero__nav ul {
+        flex-direction: row;
+    }
+
+    .hero__nav ul li a{
+        text-decoration: none;
+        color: var(--clr-grey-500);
+        line-height: 26px;
+        font-size: 15px;
+        font-weight: 400;
+    }
+
     
     .container {
         max-width: 1110px;
@@ -340,6 +514,11 @@ body {
     }
 
     .btn-menu {
+        display: none;
+        margin: 0;
+    }
+
+    .close {
         display: none;
         margin: 0;
     }
@@ -354,14 +533,12 @@ body {
 
 
     .sneaker-figures {
-        border: 1px solid red;
         width: 448px;
         height: auto;
     }
 
     .sneaker__figure {
         height: 445px;
-        border: 1px solid greenyellow;
     }
 
     .arrow {
@@ -397,11 +574,50 @@ body {
         display: flex;
         margin-top: 32px;
         gap: 32px;
+        position: relative;
     }
 
-    .image {
+    .image-wrapper {
+        position: relative;
         width: 88px; height: 88px;
         border-radius: 10px;
+        z-index: 0;
+        cursor: pointer;
+    }
+    
+        .image {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            border-radius: 10px;
+            z-index: 0;
+        }
+
+    .image-wrapper:hover::after {
+        content: " ";
+        top: 0px;
+        left: 0px;
+        position: absolute;
+        width: 88px; height: 88px;
+        border-radius: 10px;
+        background-color: #ffffff81; 
+        z-index: 1;
+    }
+
+    .image--clicked::after {
+        content: " ";
+        top: 0px;
+        left: 0px;
+        position: absolute;
+        width: 88px; height: 88px;
+        border-radius: 10px;
+        background-color: #ffffff81; 
+        outline: 2px solid var(--clr-orange-500);
+        z-index: 1;
+    }
+
+    .show-cart {
+        left: -200px;
     }
 
 }
