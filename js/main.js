@@ -13,6 +13,12 @@ const back = document.querySelector('.back');
 const next = document.querySelector('.next');
 const imgSneaker = document.querySelector('.sneaker__img'); // imagen principal
 const imagesClick = document.querySelectorAll('.image-wrapper');
+
+const backCarrucel = document.querySelector('.zone-carrucel .back');
+const nextCarrucel = document.querySelector('.zone-carrucel .next');
+const imgCarrucel = document.querySelector('.zone-carrucel .sneaker__img')
+const imagesClickCarrucel = document.querySelectorAll('.zone-carrucel .image-wrapper');
+
 let count = 0;
 function inRange(c) {
     if (c > 3) {
@@ -30,11 +36,37 @@ function toBack() {
     imgSneaker.src = urlImages[count];  
 }
 
+function toBackCarrucel() {
+    count--;
+    count = inRange(count);
+    imgCarrucel.src = urlImages[count];  
+    addSelectedPicture(urlImages[count]);
+}
+
 function toNext() {
     count++;
     count = inRange(count);
     imgSneaker.src = urlImages[count];
 }
+
+function toNextCarrucel() {
+    count++;
+    count = inRange(count);
+    imgCarrucel.src = urlImages[count];
+    addSelectedPicture(urlImages[count]);
+}
+
+function addSelectedPicture(url) {
+    imagesClickCarrucel.forEach(wrapperImg => {
+        const urlImg = wrapperImg.querySelector('.image').src;
+        wrapperImg.classList.remove('image--clicked');
+
+        if (urlImg.endsWith(url.replace('./', ''))) {
+            wrapperImg.classList.add('image--clicked');
+        }
+    });
+}
+
 
 function showImage() {  // esta función es cuando alcanza de ancho  1024 y aparcen imagen más pequeñas 
     if (window.innerWidth >= 1024) {
@@ -44,9 +76,24 @@ function showImage() {  // esta función es cuando alcanza de ancho  1024 y apar
                 img.classList.add('image--clicked');
             }
         })
+
+        imagesClickCarrucel.forEach((img, index) => {
+            img.classList.remove('image--active');
+            if (index === count) {
+                img.classList.add('image--active');
+            }
+        })
+
         
     }
+}
 
+function choseImageCarrucel(e) {
+    imagesClickCarrucel.forEach(img => img.classList.remove('image--clicked'));
+    const imgWrapper = e.currentTarget;
+    const urlImg = imgWrapper.querySelector('.image').src;
+    imgCarrucel.src = urlImg;
+    imgWrapper.classList.add('image--clicked');
 }
 
 function choseImage(e) {
@@ -62,17 +109,18 @@ window.addEventListener('resize', showImage);
 imagesClick.forEach(imgWrapper => imgWrapper.addEventListener('click', choseImage));
 
 
+imagesClickCarrucel.forEach(imgWrapper => imgWrapper.addEventListener('click', choseImageCarrucel));
+backCarrucel.addEventListener('click', toBackCarrucel);
+nextCarrucel.addEventListener('click', toNextCarrucel);
+
+
 const btnCart = document.querySelector('.btn-cart');
 const showContent = document.querySelector('.show-cart');
 
+btnCart.addEventListener('click', showCart);
 function showCart() {
     showContent.classList.toggle('show-cart--show');
 }
-
-
-
-btnCart.addEventListener('click', showCart);
-
 
 
 const minus = document.querySelector('.minus');
@@ -171,3 +219,32 @@ btnMenu.addEventListener('click', showMenuMobileTablet);
 btnClose.addEventListener('click', justClose);
 window.addEventListener('resize', justClose);
 window.addEventListener('DOMContentLoaded', justClose);
+
+
+const btnCloseCarrucel = document.querySelector('.close-carrucel');
+const zoneCarrucel = document.querySelector('.zone-carrucel');
+
+function showCarrucel() {
+     if (window.innerWidth >= 1024) {
+        mainBck.classList.add('main--active');
+        zoneCarrucel.style.display = 'block';
+    }
+}
+
+
+function closeCarrucel() {
+    mainBck.classList.remove('main--active');
+    zoneCarrucel.style.display = 'none';
+}
+
+function hideCarrucelIfSmall() {
+    if (window.innerWidth < 1024) {
+        zoneCarrucel.style.display = 'none';
+        mainBck.classList.remove('main--active');
+    }
+}
+
+const figureSneaker = document.querySelector('.sneaker__figure');
+figureSneaker.addEventListener('click', showCarrucel);
+btnCloseCarrucel.addEventListener('click', closeCarrucel);
+window.addEventListener('resize', hideCarrucelIfSmall);
